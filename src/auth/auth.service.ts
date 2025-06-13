@@ -1,5 +1,4 @@
 import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from 'src/user/user.repository';
 import { loginDto } from './dto/login.dto';
@@ -23,7 +22,6 @@ export class AuthService {
         private readonly userService: UserService,
         private readonly jwtService: JwtService,
         private readonly mailerService: MailerService,
-        private readonly configService: ConfigService
     ){}
 
     async signup(dto:UserDto){
@@ -99,7 +97,7 @@ export class AuthService {
             subject: 'OTP For Verification',
             html: 
             `<p>
-                Dear ${user.firstName} ${user.lastName},<br>Thank you for signing up with us. <br>To verify your email. Please enter the following One Time Password (OTP): <b>${token}</b><br>
+                Dear ${user.firstName} ${user.lastName},<br><br>Thank you for signing up with us. <br><br>To verify your email. Please enter the following One Time Password (OTP): <b>${token}</b><br>
                 This OTP is valid for 5 minutes from the receipt of this email. <br>
                 <br>Best regards,<br>Zenmonk
             </p>`
