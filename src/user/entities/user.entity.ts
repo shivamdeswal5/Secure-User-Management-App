@@ -29,6 +29,9 @@ export class User {
   @Column({default:'unverifed'})
   accountStatus: 'verified' | 'unverified';
 
+  @Column({ type: 'varchar',  nullable: true })
+  refreshToken: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
