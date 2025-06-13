@@ -79,7 +79,9 @@ export class AuthService {
             res.send({
                 message: "User Logged In Successfully",
                 accessToken:accessToken,
-                refreshToken: refreshToken
+                refreshToken: refreshToken,
+                userId: user.id,
+                email: user.email
             })
             
         }catch(error){
