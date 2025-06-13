@@ -16,11 +16,6 @@ export class UserController {
         @UploadedFile() file: Express.Multer.File,
         @Body() updateProfileDto:UpdateProfileDto
     ) {
-        console.log("UserId: ",id);
-        console.log("updated user data: ",updateProfileDto);
-        console.log("updated image: ",file);
-        return "Profile Updated"
-
-        // this.userService.updateProfile(id,updateProfileDto,file);
+        return this.userService.updateProfile(id,updateProfileDto,file);
     }
 }

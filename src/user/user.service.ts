@@ -25,6 +25,12 @@ export class UserService {
     if (!user) {
       throw new NotFoundException('User Not Found ..')
     }
+    const url = await this.handleUpload(file);
+    user.profileImg = url;
+    
+    Object.assign(user,updatedProfileData);
+    return this.userRepository.save(user);
+
   }
 
 
@@ -41,9 +47,8 @@ export class UserService {
       throw new BadRequestException('File is to large, Please Compress and try again ...!');
     }
     const result = this.cloudinaryService.uploadImage(file);
-    return {
-      url: (await result).secure_url
-    };
+    const url = (await result).secure_url;
+    return url;
   }
 
 }
