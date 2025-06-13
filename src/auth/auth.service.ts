@@ -53,8 +53,9 @@ export class AuthService {
             if(!isPasswordValid){
                 throw new HttpException('Invalid Password',401);
             }
+            console.log("Login User: ", user);
 
-            if(user.accountStatus === 'unverified'){
+            if(user.accountStatus === 'unverifed'){
                 if(!otp){
                     return {
                         message: `Account not Verified. Please Login with OTP or Request New`
