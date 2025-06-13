@@ -30,6 +30,9 @@ export class User {
   accountStatus: 'verified' | 'unverified';
 
   @Column({ type: 'varchar',  nullable: true })
+  profileImg: string;
+
+  @Column({ type: 'varchar',  nullable: true })
   refreshToken: string;
 
   @CreateDateColumn()

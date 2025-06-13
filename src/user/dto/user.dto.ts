@@ -4,6 +4,7 @@ import {
   IsString,
   MinLength,
   MaxLength,
+  IsOptional,
 } from 'class-validator';
 
 export class UserDto {
@@ -23,5 +24,8 @@ export class UserDto {
   @IsString({ message: 'Last name must be a string.' })
   @IsNotEmpty({ message: 'Last name is required.' })
   lastName: string; 
+
+  @IsOptional()
+  profileImage?: string
   
 } 
