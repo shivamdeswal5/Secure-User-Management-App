@@ -61,7 +61,7 @@ export class AuthService {
                     }
                 }else{
                     console.log("Verifying OTP ...");
-                    
+                    await this.verifyToken(user.id, otp);
                 }
             }
 
