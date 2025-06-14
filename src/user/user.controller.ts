@@ -1,7 +1,8 @@
-import { Body, Controller, Param, Patch, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Param, Patch, Req, UnauthorizedException, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { AuthenticatedRequest } from './types/authenticated-request';
 
 @Controller('users')
 export class UserController {
@@ -9,13 +10,19 @@ export class UserController {
         private readonly userService: UserService
     ) { }
 
-    @Patch('profile/:id')
+    @Patch('profile')
     @UseInterceptors(FileInterceptor('file'))
     updateProfile(
-        @Param('id') id:string, 
+        @Req() req :AuthenticatedRequest,
         @UploadedFile() file: Express.Multer.File,
         @Body() updateProfileDto:UpdateProfileDto
     ) {
-        return this.userService.updateProfile(id,updateProfileDto,file);
+        console.log(req.user);
+        const userId = req.user?.id;
+        console.log("User Id: ",userId);
+        if (!userId) {
+            throw new UnauthorizedException('User ID not found in request');
+        }
+        return this.userService.updateProfile(userId, updateProfileDto, file);
     }
 }

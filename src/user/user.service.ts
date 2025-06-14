@@ -33,7 +33,6 @@ export class UserService {
 
   }
 
-
   async handleUpload(file: Express.Multer.File) {
     if (!file) {
       throw new BadRequestException('no file uploaded');

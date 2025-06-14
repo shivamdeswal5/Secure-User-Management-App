@@ -63,7 +63,7 @@ export class AppModule implements NestModule {
       .apply(AuthMiddleware)
       // .exclude('/auth/request-otp')
       .forRoutes(
-        { path: 'user/*', method: RequestMethod.ALL },
+        { path: 'users/*', method: RequestMethod.ALL },
         { path: 'auth/*', method: RequestMethod.ALL }
       );
   }

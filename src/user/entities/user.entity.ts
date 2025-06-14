@@ -26,8 +26,8 @@ export class User {
   @Column()
   lastName: string;
 
-  @Column({default:'unverifed'})
-  accountStatus: 'verified' | 'unverifed';
+  @Column({default:'unverified'})
+  accountStatus: 'verified' | 'unverified';
 
   @Column({ type: 'varchar',  nullable: true })
   profileImg: string;

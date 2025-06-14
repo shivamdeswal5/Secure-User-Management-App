@@ -55,7 +55,7 @@ export class AuthService {
             }
             console.log("Login User: ", user);
 
-            if(user.accountStatus === 'unverifed'){
+            if(user.accountStatus === 'unverified'){
                 if(!otp){
                     return {
                         message: `Account not Verified. Please Login with OTP or Request New`
@@ -202,7 +202,5 @@ export class AuthService {
             throw error
 
         }
-
-
     }
 }
