@@ -50,4 +50,14 @@ export class UserService {
     return url;
   }
 
+  async getProfile(id: string) {
+  const user = await this.userRepository.findOne({ where: { id } });
+  if (!user) {
+    throw new NotFoundException('User not found');
+  }
+
+  const { password, ...rest } = user;
+  return rest;
+}
+
 }

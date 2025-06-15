@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Req, UnauthorizedException, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Req, UnauthorizedException, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserService } from './user.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
@@ -25,4 +25,15 @@ export class UserController {
         }
         return this.userService.updateProfile(userId, updateProfileDto, file);
     }
+
+    @Get('profile')
+    getProfile(@Req() req: AuthenticatedRequest) {
+        const userId = req.user?.id;
+        if (!userId) {
+            throw new UnauthorizedException('User not authenticated');
+        }
+        return this.userService.getProfile(userId);
+    }
+
+    
 }
